@@ -1,0 +1,26 @@
+# Fitness First Gym Management System - Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core web framework
+Django>=5.0,<6.0
+
+# Django REST Framework for building the REST API
+djangorestframework>=3.15.0
+
+# JWT authentication for secure API access
+djangorestframework-simplejwt>=5.3.0
+
+# CORS support for the React frontend on a different origin
+django-cors-headers>=4.3.0
+
+# Environment variable management (.env file)
+python-decouple>=3.8
+
+# PostgreSQL database driver (production database)
+psycopg2-binary>=2.9.9
+
+# Filtering, searching, and ordering for DRF endpoints
+django-filter>=24.1
+
+# Production static file serving (WhiteNoise middleware)
+whitenoise>=6.6.0

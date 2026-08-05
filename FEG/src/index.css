@@ -1,0 +1,346 @@
+/**
+ * Global styles for Fitness First Gym Management System.
+ * Tailwind CSS v4 with a Vercel-inspired design system:
+ * neutral monochrome surfaces, a refined indigo accent, generous spacing,
+ * crisp borders, and subtle shadows.
+ */
+@import "tailwindcss";
+
+/* Dark mode is driven by the `.dark` class on <html>, toggled by the theme
+   store. Tailwind v4 uses prefers-color-scheme by default, so we must declare
+   the custom variant to make all `dark:` utilities respond to the class. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   Custom Theme Configuration
+   ============================================================ */
+
+@theme {
+  /* Foreground / accent - a refined indigo inspired by Vercel's accents */
+  --color-primary-50: #f0f4ff;
+  --color-primary-100: #e0e8ff;
+  --color-primary-200: #c7d4ff;
+  --color-primary-300: #a3b8ff;
+  --color-primary-400: #7c93ff;
+  --color-primary-500: #5c6df2;
+  --color-primary-600: #4b59e0;
+  --color-primary-700: #3d48b8;
+  --color-primary-800: #333c94;
+  --color-primary-900: #2b3270;
+  --color-primary-950: #1a1f45;
+
+  /* Neutral monochrome scale (Vercel-inspired grays) */
+  --color-charcoal-50: #fdfdfc;
+  --color-charcoal-100: #f6f6f5;
+  --color-charcoal-200: #e8e8e6;
+  --color-charcoal-300: #d9d9d6;
+  --color-charcoal-400: #b5b5b0;
+  --color-charcoal-500: #85857f;
+  --color-charcoal-600: #6f6f69;
+  --color-charcoal-700: #52525a;
+  --color-charcoal-800: #292929;
+  --color-charcoal-900: #171717;
+  --color-charcoal-950: #0a0a0a;
+
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+
+  /* Refined shadows - layered, soft, low-opacity */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05), 0 1px 3px 0 rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+
+  --animate-fade-in: fadeIn 0.4s ease-in-out;
+  --animate-slide-up: slideUp 0.5s ease-out;
+  --animate-slide-down: slideDown 0.3s ease-out;
+  --animate-slide-in-right: slideInRight 0.3s ease-out;
+  --animate-slide-in-left: slideInLeft 0.3s ease-out;
+  --animate-scale-in: scaleIn 0.2s ease-out;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-spin-slow: spin 3s linear infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ============================================================
+   Base Styles
+   ============================================================ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: var(--color-charcoal-900);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    letter-spacing: -0.011em;
+    line-height: 1.6;
+  }
+
+  .dark body {
+    background-color: var(--color-charcoal-950);
+    color: var(--color-charcoal-100);
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.025em;
+    font-weight: 600;
+  }
+
+  /* Refined scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-charcoal-300);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background-color: var(--color-charcoal-700);
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-charcoal-400);
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-charcoal-600);
+  }
+
+  /* Selection styles */
+  ::selection {
+    background-color: var(--color-primary-100);
+    color: var(--color-primary-900);
+  }
+
+  .dark ::selection {
+    background-color: var(--color-primary-800);
+    color: var(--color-primary-100);
+  }
+
+  /* Accessible focus ring - Vercel style */
+  :focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+  }
+}
+
+/* ============================================================
+   Component Styles
+   ============================================================ */
+
+@layer components {
+  /* Frosted glass card effect for overlays/modals */
+  .glass {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .dark .glass {
+    background-color: rgba(10, 10, 10, 0.85);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Subtle accent gradient text */
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to bottom, var(--color-charcoal-950), var(--color-charcoal-600));
+  }
+
+  .dark .text-gradient {
+    background-image: linear-gradient(to bottom, #ffffff, var(--color-charcoal-400));
+  }
+
+  .text-accent-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to bottom right, var(--color-primary-600), var(--color-primary-400));
+  }
+
+  /* Skeleton loading animation */
+  .skeleton-pulse {
+    animation: pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    background-color: var(--color-charcoal-100);
+    border-radius: 0.375rem;
+  }
+
+  .dark .skeleton-pulse {
+    background-color: var(--color-charcoal-800);
+  }
+}
+
+/* ============================================================
+   Utility Styles
+   ============================================================ */
+
+@layer utilities {
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Line clamp */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* ============================================================
+   Table Styles (Vercel-inspired data tables)
+   ============================================================ */
+
+@layer base {
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .data-table thead th {
+    padding: 0.625rem 1rem;
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-500);
+    border-bottom: 1px solid var(--color-charcoal-200);
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    background-color: var(--color-charcoal-50);
+    z-index: 1;
+  }
+
+  .dark .data-table thead th {
+    color: var(--color-charcoal-400);
+    border-color: var(--color-charcoal-800);
+    background-color: var(--color-charcoal-900);
+  }
+
+  .data-table tbody td {
+    padding: 0.75rem 1rem;
+    color: var(--color-charcoal-700);
+    border-bottom: 1px solid var(--color-charcoal-100);
+  }
+
+  .dark .data-table tbody td {
+    color: var(--color-charcoal-300);
+    border-color: color-mix(in srgb, var(--color-charcoal-800) 60%, transparent);
+  }
+
+  .data-table tbody tr {
+    transition: background-color 0.12s ease;
+  }
+
+  .data-table tbody tr:hover {
+    background-color: var(--color-charcoal-50);
+  }
+
+  .dark .data-table tbody tr:hover {
+    background-color: color-mix(in srgb, var(--color-charcoal-800) 40%, transparent);
+  }
+}
+
+/* ============================================================
+   Print Styles
+   ============================================================ */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* ============================================================
+   Dark Mode Transitions
+   ============================================================ */
+
+.dark,
+.dark * {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
