@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useCategories } from '@/hooks/useCategories';
+import { assetUrl } from '@/lib/utils';
 import type { Category } from '@/types';
 
 export default function CategoriesPage() {
@@ -52,7 +53,7 @@ export default function CategoriesPage() {
                     {category.image ? (
                       <div className="h-40 overflow-hidden">
                         <img
-                          src={category.image}
+                          src={assetUrl(category.image)}
                           alt={category.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />

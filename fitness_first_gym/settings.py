@@ -85,17 +85,32 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'fitness_first_gym.wsgi.application'
 
-# DATABASE - SQLite for development, switch to PostgreSQL for production
-DATABASES = {
-    'default': {
-        'ENGINE': config('DB_ENGINE', default='django.db.backends.sqlite3'),
-        'NAME': config('DB_NAME', default=BASE_DIR / 'db.sqlite3'),
-        'USER': config('DB_USER', default=''),
-        'PASSWORD': config('DB_PASSWORD', default=''),
-        'HOST': config('DB_HOST', default=''),
-        'PORT': config('DB_PORT', default=''),
+# DATABASE - SQLite for local development, PostgreSQL for production.
+# Render sets DATABASE_URL automatically (e.g. postgres://user:pass@host:5432/db).
+# When DATABASE_URL is present we use PostgreSQL; otherwise we fall back to SQLite
+# so local development works with zero configuration.
+import dj_database_url  # noqa: E402
+
+_DATABASE_URL = config('DATABASE_URL', default='')
+if _DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=_DATABASE_URL,
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': config('DB_ENGINE', default='django.db.backends.sqlite3'),
+            'NAME': config('DB_NAME', default=BASE_DIR / 'db.sqlite3'),
+            'USER': config('DB_USER', default=''),
+            'PASSWORD': config('DB_PASSWORD', default=''),
+            'HOST': config('DB_HOST', default=''),
+            'PORT': config('DB_PORT', default=''),
+        }
+    }
 
 # AUTH
 AUTH_USER_MODEL = 'accounts.User'

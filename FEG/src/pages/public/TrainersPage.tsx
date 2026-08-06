@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { useTrainers } from '@/hooks/useTrainers';
+import { assetUrl } from '@/lib/utils';
 import type { Trainer } from '@/types';
 
 export default function TrainersPage() {
@@ -49,7 +50,7 @@ export default function TrainersPage() {
                     <CardContent className="p-6 text-center">
                       <div className="w-24 h-24 mx-auto rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 flex items-center justify-center mb-4">
                         {trainer.photo ? (
-                          <img src={trainer.photo} alt={trainer.name} className="w-24 h-24 rounded-full object-cover" />
+                          <img src={assetUrl(trainer.photo)} alt={trainer.name} className="w-24 h-24 rounded-full object-cover" />
                         ) : (
                           <UserCircle className="h-12 w-12" />
                         )}

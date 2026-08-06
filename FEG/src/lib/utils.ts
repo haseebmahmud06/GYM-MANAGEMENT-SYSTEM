@@ -179,3 +179,25 @@ export function getPaymentStatusColor(status: string): string {
   };
   return colors[status] || 'bg-gray-100 text-gray-800';
 }
+
+/**
+ * Resolve a media/asset path to a fully-qualified URL the browser can load.
+ *
+ * The backend returns image paths like "/media/packages/Gymkits.jpeg.jpg" (or
+ * absolute http://... URLs in dev). In production the frontend and the Django
+ * backend live on different origins, so relative "/media/..." paths must be
+ * prefixed with the backend's base URL (from VITE_API_URL).
+ *
+ * - Absolute URLs (http/https/data:) are returned unchanged.
+ * - Relative "/media|/static" paths are prefixed with the API origin.
+ * - Empty/null values fall back to an empty string.
+ */
+export function assetUrl(path: string | null | undefined): string {
+  if (!path) return '';
+  // Already absolute (http://, https://, //, data:) -> use as-is.
+  if (/^(https?:)?\/\//i.test(path) || /^data:/i.test(path)) return path;
+  // Relative media/static path -> prefix with the API origin.
+  const apiBase = import.meta.env.VITE_API_URL || '/api';
+  const origin = apiBase.replace(/\/api\/?$/, '');
+  return `${origin}${path.startsWith('/') ? '' : '/'}${path}`;
+}

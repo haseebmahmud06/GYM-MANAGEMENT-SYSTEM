@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { usePackages } from '@/hooks/usePackages';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency, assetUrl } from '@/lib/utils';
 import type { Package as PackageType } from '@/types';
 
 const faqs = [
@@ -61,7 +61,7 @@ export default function MembershipPage() {
                     {pkg.image ? (
                       <div className="h-40 overflow-hidden">
                         <img
-                          src={pkg.image}
+                          src={assetUrl(pkg.image)}
                           alt={pkg.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />

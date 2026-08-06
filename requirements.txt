@@ -19,6 +19,12 @@ python-decouple>=3.8
 # PostgreSQL database driver (production database)
 psycopg2-binary>=2.9.9
 
+# Parse DATABASE_URL into Django DB config (used by Render's Postgres)
+dj-database-url>=2.1.0
+
+# Production WSGI server (used by Render web service)
+gunicorn>=21.2.0
+
 # Filtering, searching, and ordering for DRF endpoints
 django-filter>=24.1
 

@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useEquipment } from '@/hooks/useEquipment';
+import { assetUrl } from '@/lib/utils';
 
 const categories = [
   { name: 'Cardio Zone', description: 'Treadmills, stationary bikes, rowing machines, and more.' },
@@ -79,7 +80,7 @@ export default function EquipmentPage() {
                     {item.image ? (
                       <div className="h-40 overflow-hidden">
                         <img
-                          src={item.image}
+                          src={assetUrl(item.image)}
                           alt={item.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
