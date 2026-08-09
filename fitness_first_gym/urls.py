@@ -7,6 +7,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve as static_serve
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
@@ -33,3 +34,15 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# Serve media files in production too (single-server free deploy).
+# In a larger setup this would be handled by S3/Cloudinary or a CDN, but for a
+# free render deploy serving from disk is the simplest option.
+if not settings.DEBUG:
+    urlpatterns += [
+        path(
+            f'{settings.MEDIA_URL.lstrip("/")}<path:path>',
+            static_serve,
+            kwargs={'document_root': settings.MEDIA_ROOT},
+        ),
+    ]
