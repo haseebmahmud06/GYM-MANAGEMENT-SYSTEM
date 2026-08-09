@@ -19,6 +19,9 @@ python-decouple>=3.8
 # PostgreSQL database driver (production database)
 psycopg2-binary>=2.9.9
 
+# Image handling (required for Django ImageField — trainer photos, package/category/equipment images)
+Pillow>=10.0.0
+
 # Parse DATABASE_URL into Django DB config (used by Render's Postgres)
 dj-database-url>=2.1.0
 
