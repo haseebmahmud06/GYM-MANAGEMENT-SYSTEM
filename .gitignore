@@ -29,19 +29,6 @@ venv.bak/
 db.sqlite3
 db.sqlite3-journal
 
-# Media / user-uploaded files
-# Track the seeded public image folders so images display on the deployed site.
-# Un-ignore media/ entirely, then re-ignore only user-generated folders.
-media/*
-!media/README.md
-!media/categories/
-!media/equipment/
-!media/packages/
-!media/trainers/
-# User-generated uploads stay ignored.
-media/profiles/
-media/qrcodes/
-
 # Secrets & environment
 .env
 .env.local
