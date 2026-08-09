@@ -10,8 +10,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-@frtts0*#&27j&o&0$lbtp5&ds8z-d_4yt9t77cw)vsx*03j4h')
-DEBUG = config('DEBUG', default=True, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+# Default DEBUG to False in production (i.e. when DATABASE_URL is set).
+DEBUG = config('DEBUG', default=not bool(config('DATABASE_URL', default='')), cast=bool)
+# Default ALLOWED_HOSTS to include common production hosts (Render + localhost).
+_DEFAULT_HOSTS = 'localhost,127.0.0.1,.onrender.com'
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=_DEFAULT_HOSTS).split(',')
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=False, cast=bool)
 SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=False, cast=bool)
