@@ -61,6 +61,11 @@ export default function DashboardPage() {
   const { data: revenueData, isLoading: revenueLoading } = useRevenueData('12m');
   const { data: attendanceData, isLoading: attendanceLoading } = useAttendanceData('30d');
   const { data: recentRegistrations, isLoading: registrationsLoading } = useRecentRegistrations();
+  const { theme } = useThemeStore();
+  const tooltipStyle = chartTooltipStyle(theme);
+  const tickStyle = chartTickStyle(theme);
+  const gridColor = chartGridColor(theme);
+  const cursorColor = chartCursorColor(theme);
 
   const statCards: StatCardProps[] = [
     {
@@ -120,11 +125,6 @@ export default function DashboardPage() {
   const revenueChartData = revenueData?.data || [];
   const attendanceChartData = attendanceData?.data || [];
   const recentRegs = recentRegistrations?.data || [];
-  const { theme } = useThemeStore();
-  const tooltipStyle = chartTooltipStyle(theme);
-  const tickStyle = chartTickStyle(theme);
-  const gridColor = chartGridColor(theme);
-  const cursorColor = chartCursorColor(theme);
 
   return (
     <div className="space-y-6">
