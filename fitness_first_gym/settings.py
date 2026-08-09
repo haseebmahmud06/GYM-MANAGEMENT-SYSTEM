@@ -175,7 +175,11 @@ SIMPLE_JWT = {
 }
 
 # CORS
-CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', default=False, cast=bool)
+# In production (DATABASE_URL set) default to allowing all origins so the
+# deployed frontend (e.g. Vercel) can reach the API cross-origin. Dev keeps
+# the localhost whitelist.
+_PROD = bool(config('DATABASE_URL', default=''))
+CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', default=_PROD, cast=bool)
 CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
     default='http://localhost:3000,http://127.0.0.1:3000',
