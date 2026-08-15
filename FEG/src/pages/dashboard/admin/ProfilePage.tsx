@@ -106,7 +106,9 @@ export default function ProfilePage() {
               <h3 className="text-lg font-semibold text-charcoal-900 dark:text-white mt-4">{user?.full_name || 'Admin User'}</h3>
               <p className="text-sm text-charcoal-500 dark:text-charcoal-400">{user?.email}</p>
               <div className="mt-4 flex justify-center gap-2">
-                <Badge variant="success">Administrator</Badge>
+                <Badge variant={user?.is_staff ? 'success' : 'default'}>
+                  {user?.is_staff ? 'Administrator' : 'Member'}
+                </Badge>
                 {user?.email_verified && <Badge variant="info">Verified</Badge>}
               </div>
               <div className="mt-6 space-y-3 text-left">
@@ -116,7 +118,7 @@ export default function ProfilePage() {
                 </div>
                 <div className="flex items-center gap-2 text-sm text-charcoal-600 dark:text-charcoal-400">
                   <Shield className="h-4 w-4" />
-                  <span>Role: Administrator</span>
+                  <span>Role: {user?.is_staff ? 'Administrator' : 'Member'}</span>
                 </div>
               </div>
             </CardContent>

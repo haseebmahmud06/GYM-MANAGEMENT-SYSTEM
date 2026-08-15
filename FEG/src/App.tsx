@@ -103,6 +103,16 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+// Admin dashboard overview shows sensitive data (revenue, members, etc.).
+// Only staff should see it; members go to their own progress view.
+function RoleDashboardIndex() {
+  const { user } = useAuthStore();
+  if (!user?.is_staff) {
+    return <Navigate to="/dashboard/progress" replace />;
+  }
+  return <DashboardPage />;
+}
+
 // ============================================================
 // App Component
 // ============================================================
@@ -188,8 +198,8 @@ export default function App() {
                 </ProtectedRoute>
               }
             >
-              {/* Admin Dashboard */}
-              <Route index element={<DashboardPage />} />
+              {/* Admin Dashboard (index) — admin-only, members redirect to /progress */}
+              <Route index element={<RoleDashboardIndex />} />
               <Route path="members" element={<MembersPage />} />
               <Route path="trainers" element={<TrainersAdminPage />} />
               <Route path="packages" element={<PackagesPage />} />
